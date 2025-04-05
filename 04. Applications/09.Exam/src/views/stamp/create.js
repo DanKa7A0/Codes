@@ -38,7 +38,7 @@ async function SumbitCreateStamp(e){
         const sendData = {
             name: data["name-input"],
             imageUrl: data["image-url-input"],
-            year: Number(data["year-input"]),
+            year: data["year-input"],
             learnMore: data["more-info-textarea"],
         };
         await post("/data/stamps", sendData);
