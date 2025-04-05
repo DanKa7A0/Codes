@@ -1,3 +1,4 @@
+import page from '../../../node_modules/page/page.mjs';
 import { render, html } from '../../../node_modules/lit-html/lit-html.js';
 import { get } from '../../api/api.js';
 import { getUserData } from '../../utility/local storage.js';
@@ -5,7 +6,6 @@ import { getUserData } from '../../utility/local storage.js';
 export default async function(ctx) {
     try {
         const response = await get("/data/stamps/" + ctx.params.id);
-        console.log(response);
         render(DetailsTemplate(response), document.querySelector('main'));
     }
     catch (error) {}
@@ -33,14 +33,14 @@ function DetailsTemplate(row){
                 <div id="action-buttons">
                     ${
                         row._ownerId === getUserData()?._id
-                            ?
+                            ?                                
                                 html`
                                     <a href="/edit/${row._id}" id="edit-btn">Edit</a>
-                                    <a href="/delete/${row._id}" id="delete-btn">Delete</a>
+                                    <a id="delete-btn" @click=${(e) => DeleteAskDialog(e, row._id)}>Delete</a>
                                 ` 
                             :
                                 html`
-                                    <a href="#" id="like-btn">Like</a>
+                                    <a href="/like" id="like-btn">Like</a>
                                 `
                     }                
                 </div>
@@ -48,4 +48,10 @@ function DetailsTemplate(row){
             </div>
         </section>
     `;
+}
+
+function DeleteAskDialog(e, id){
+    if (confirm('Are you sure you want to delete this ?')) {
+        page.redirect("/delete/" + id);
+    }
 }
