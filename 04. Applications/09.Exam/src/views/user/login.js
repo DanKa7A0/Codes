@@ -39,9 +39,7 @@ async function SubmitLogin(e){
 
         const response = await post("/users/login", data);
         setUserData(response);
-        page.redirect("/dashboard");
+        page.redirect("/");
         
-    } catch (error) {
-        
-    }
+    } catch (error) {}
 }
