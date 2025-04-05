@@ -5,7 +5,7 @@ export default function() {
 }
 
 function EditTemplate(){
-    html`
+    return html`
        <!-- Edit Page (Only for logged-in users) -->
       <section id="edit">
         <div class="form">

@@ -5,7 +5,7 @@ export default function() {
 }
 
 function CreateTemplate(){
-    html`
+    return html`
         <!-- Create Page (Only for logged-in users) -->
       <section id="create">
         <div class="form">

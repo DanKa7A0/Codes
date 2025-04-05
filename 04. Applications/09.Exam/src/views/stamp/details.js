@@ -5,7 +5,7 @@ export default function() {
 }
 
 function DetailsTemplate(){
-    html`
+    return html`
         <!-- Details page -->
         <section id="details">
             <div id="details-wrapper">

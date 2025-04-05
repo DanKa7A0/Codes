@@ -28,19 +28,20 @@ function LoginTemplate(){
 }
 
 async function SubmitLogin(e){
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+    try {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.currentTarget));
 
-    if (data.email === "" || data.password === "") {
-        alert("All fields are required!");
-        return 0;
-    }
+        if (data.email === "" || data.password === "") {
+            alert("All fields are required!");
+            return 0;
+        }
 
-    const response = await post("/users/login", data);
-    if (response.accessToken) {
+        const response = await post("/users/login", data);
         setUserData(response);
         page.redirect("/dashboard");
-    } else {
-        alert("Invalid email or password!");
-    }   
+        
+    } catch (error) {
+        
+    }
 }

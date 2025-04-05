@@ -20,7 +20,7 @@ function NavigationTemplate(){
             html`
                 <!-- Logged-in users -->
                 <div class="user">
-                <a href="/add">Add Stamp</a>
+                <a href="/create">Add Stamp</a>
                 <a href="/logout">Logout</a>
                 </div>
             `
