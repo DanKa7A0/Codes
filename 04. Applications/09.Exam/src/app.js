@@ -22,7 +22,7 @@ page("/logout", Logout);
 
 page("/dashboard", Dashboard);
 page("/create", Create);
-page("details/:id", Details);
+page("/details/:id", Details);
 page("/edit/:id", Edit);
 page("/delete/:id", Delete);
 
