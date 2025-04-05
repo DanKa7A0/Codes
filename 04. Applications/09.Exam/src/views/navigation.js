@@ -1,5 +1,5 @@
 import { render, html } from '../../node_modules/lit-html/lit-html.js';
-import { USERINFO } from '../utility/constants.js';
+
 
 export default function (ctx, next) {
     render(NavigationTemplate(), document.querySelector("header"));
@@ -15,7 +15,7 @@ function NavigationTemplate(){
             <a href="/dashboard">Collection</a>
             </div>
 
-          ${USERINFO?.hasOwnProperty("accessToken")
+          ${localStorage.getItem("user")
             ?
             html`
                 <!-- Logged-in users -->
