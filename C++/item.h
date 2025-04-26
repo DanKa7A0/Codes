@@ -6,9 +6,9 @@ public:
     Item(const std::string& name, double price);
 
     void getName() const;
-    void getPrice() const;
+    double getPrice() const;
 
 private:
     std::string name;
-    double price;    
+    double price;
 };
