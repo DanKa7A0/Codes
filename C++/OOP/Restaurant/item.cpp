@@ -2,8 +2,8 @@
 
 Item::Item(const std::string &name, double price) : name(name), price(price) {}
 
-void Item::getName() const {
-
+std::string Item::getName() const {
+    return name;
 }
 
 double Item::getPrice() const {
