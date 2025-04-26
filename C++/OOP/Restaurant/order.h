@@ -5,9 +5,9 @@
 class Order {    
 public:
     void addItem(Item item);
-    void displayOrder() const;
+    void printOrder(std::ostream &out) const;
+    void printWelcomeMessage(std::ostream &out) const;
 
 private:
     std::vector<Item> items;
-    double totalSum = 0.0;
 };
