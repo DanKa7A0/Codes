@@ -15,5 +15,5 @@ public:
 
 private:
     std::vector<Item> items;
-    const Discount *discount;
+    const Discount *discount = nullptr;
 };
