@@ -7,8 +7,8 @@
 using namespace std;
 
 int main(int argc, char const *argv[]){
-    map<int, Account> accounts = {};
-    map<int, Client> clients = {};
+    map<int, Account> accounts;
+    map<int, Client> clients;
 
     cout << "[1] Register Client:" << endl;
     cout << "[2] Open Account" << endl;
@@ -40,16 +40,14 @@ int main(int argc, char const *argv[]){
             cin >> phoneNumber;
             
             Client client(id, firstName, lastName, phoneNumber);
-            clients[id] = client;
+            clients.insert({id, client});
 
-            int acc_ID;
-            cin >> acc_ID;
-            cout << clients[acc_ID].getFirstName();
+            cout << clients.at(id).getFirstName();
 
             cout << endl << "Client Registered!" << endl;
         }
 
-        if (cmd == "8"){
+        if (cmd == "8") {
             break;
         }
     }

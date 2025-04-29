@@ -1,7 +1,9 @@
 #include "client.h"
 
 Client::Client(int id, string firstName, string lastName, string phoneNumber) :
-id(id), firstName(firstName), lastName(lastName), phoneNumber(phoneNumber){};
+id(id), firstName(firstName), lastName(lastName), phoneNumber(phoneNumber) {}
+
+
 
 void Client::registerAcc(std::istream &in, std::ostream &out){
     out << "Client ID (4 digits): ";
