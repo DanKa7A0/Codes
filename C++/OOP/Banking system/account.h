@@ -11,8 +11,10 @@ public:
     double getBalance() const;
     string getAccount_ID() const;
     string getAccountType() const;
+    double getWithdrawFee() const;
 
-    void depositMoney( double deposit);
+    void depositMoney(double deposit);
+    void withdrawMoney(double withdraw);
 
 
 protected:
@@ -21,5 +23,5 @@ protected:
     string accountType;
     double balance = 100;
     int transactionFee = 0;
-    double withdrawalsFee = 0;
+    double withdrawFee = 0;
 };

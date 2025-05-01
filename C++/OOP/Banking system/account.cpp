@@ -14,6 +14,14 @@ string Account::getAccountType() const {
     return accountType;
 }
 
+double Account::getWithdrawFee() const{
+    return withdrawFee;
+}
+
 void Account::depositMoney(double deposit) {
     balance += deposit;
+}
+
+void Account::withdrawMoney(double withdraw) {
+    balance -= (withdraw + withdrawFee);
 }

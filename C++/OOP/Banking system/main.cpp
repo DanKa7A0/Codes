@@ -107,7 +107,7 @@ int main(int argc, char const *argv[]){
         }
 
 
-        if (cmd == "4"){ // deposit in account            
+        if (cmd == "4") { // deposit in account            
             string account_ID;
             cout << endl << "Accout number: ";
             *input >> account_ID;
@@ -119,6 +119,20 @@ int main(int argc, char const *argv[]){
 
             targetAcc->depositMoney(deposit);
             cout << endl << "Deposit successful. New balance: " << targetAcc->getBalance() << endl << endl;
+        }
+
+        if (cmd == "5") { // withdraw
+            string account_ID;
+            cout << endl << "Accout number: ";
+            *input >> account_ID;
+            Account* targetAcc = accounts.at(account_ID);
+
+            double withdraw;
+            cout << endl << "Enter amount to deposit: ";
+            *input >> withdraw;
+
+            targetAcc->withdrawMoney(withdraw);
+            cout << endl << "Withdrawal successful. Fee: " << targetAcc->getWithdrawFee() << ". New balance: " << targetAcc->getBalance() << endl << endl;
         }
 
         if (cmd == "8") { // end 
