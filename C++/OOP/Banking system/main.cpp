@@ -1,6 +1,7 @@
 #include "account.h"
 #include "client.h"
 #include "standartAccount.h"
+#include "premiumAccount.h"
 
 #include <iostream>
 #include <fstream> // Added for std::ifstream
@@ -90,14 +91,25 @@ int main(int argc, char const *argv[]){
                 Account* account = new StandartAccount(client_ID, account_ID);
                 accounts.insert({account_ID, account});
                 cout << endl << "Account created! Balance: " << account->getBalance() << endl;
+                delete account;
             }
 
+            if (accountType == "premium") {
+                Account* account = new PremiumAccount(client_ID, account_ID);
+                accounts.insert({account_ID, account});
+                cout << endl << "Account created! Balance: " << account->getBalance() << endl;
+                delete account;
+            }
         }
 
         if (cmd == "8") {
             break;
         }
     }
+
+
+    
+
 
     return 0;
 }
