@@ -11,16 +11,6 @@ int main(int argc, char const *argv[]){
     map<int, Account> accounts;
     map<int, Client> clients;
 
-    cout << "[1] Register Client:" << endl;
-    cout << "[2] Open Account" << endl;
-    cout << "[3] List Client Accounts" << endl;
-    cout << "[4] Deposit" << endl;
-    cout << "[5] Withdraw" << endl;
-    cout << "[6] Transfer" << endl;
-    cout << "[7] Show Account" << endl;
-    cout << "[8] Exit" << endl;
-
-
     // make input stream
     string command;    
     istream* input = &std::cin; // Default to std::cin
@@ -34,16 +24,25 @@ int main(int argc, char const *argv[]){
         input = &testInput; // Use file if provided
     }
 
+    cout << "[1] Register Client:" << endl;
+    cout << "[2] Open Account" << endl;
+    cout << "[3] List Client Accounts" << endl;
+    cout << "[4] Deposit" << endl;
+    cout << "[5] Withdraw" << endl;
+    cout << "[6] Transfer" << endl;
+    cout << "[7] Show Account" << endl;
+    cout << "[8] Exit" << endl;
+
     string cmd;
     while (*input >> cmd) {
         if (cmd == "1") {
-            int id;
+            int client_ID;
             string firstName;
             string lastName;
             string phoneNumber;
 
             cout << "Client ID (4 digits): ";
-            *input >> id;
+            *input >> client_ID;
 
             cout << endl << "First Name: ";
             *input >> firstName;
@@ -54,9 +53,9 @@ int main(int argc, char const *argv[]){
             cout << endl << "Phone Number: ";
             *input >> phoneNumber;
             
-            Client client(id, firstName, lastName, phoneNumber);
-            clients.insert({id, client});
-
+            Client client(client_ID, firstName, lastName, phoneNumber);
+            clients.insert({client_ID, client});
+        
             cout << endl << "Client Registered!" << endl;
         }
 
