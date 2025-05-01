@@ -14,4 +14,4 @@ standart
 dcba
 premium
 
-8
+3
