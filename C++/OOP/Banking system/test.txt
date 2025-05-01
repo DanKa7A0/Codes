@@ -8,10 +8,13 @@ Meikan
 1001
 abcd
 standart
-
+ 
 2
-1002
+1001
 dcba
 premium
 
 3
+1001
+
+8

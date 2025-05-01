@@ -61,16 +61,10 @@ int main(int argc, char const *argv[]){
             Client client(client_ID, firstName, lastName, phoneNumber);
             clients.insert({client_ID, client});
         
-            cout << endl << endl << "Client Registered!" << endl << endl;
+            cout << endl << "Client Registered!" << endl << endl;
         }
 
-        if (cmd == "2") {
-            // Choose option: 2
-            // Client ID: 1001
-            // Account number: X9Y8
-            // Type (standard/premium): premium
-            // Account created! Balance: $100.00
-            
+        if (cmd == "2") {           
             int client_ID;
             string account_ID;
             string accountType;
@@ -89,17 +83,26 @@ int main(int argc, char const *argv[]){
                 
             if (accountType == "standart") {
                 Account* account = new StandartAccount(client_ID, account_ID);
+                cout << account_ID << endl;
                 accounts.insert({account_ID, account});
+                clients.at(client_ID).pushAccount(account);
                 cout << endl << "Account created! Balance: " << account->getBalance() << endl;
-                delete account;
             }
 
             if (accountType == "premium") {
                 Account* account = new PremiumAccount(client_ID, account_ID);
                 accounts.insert({account_ID, account});
-                cout << endl << "Account created! Balance: " << account->getBalance() << endl;
-                delete account;
-            }
+                clients.at(client_ID).pushAccount(account);
+                cout << endl << "Account created! Balance: " << account->getBalance() << endl << endl;
+            }                        
+        }
+
+        if (cmd == "3") {
+            int client_ID;            
+            cout << "Client ID: ";
+            *input >> client_ID;
+            cout << endl;
+            clients.at(client_ID).printAccounts(cout);
         }
 
         if (cmd == "8") {

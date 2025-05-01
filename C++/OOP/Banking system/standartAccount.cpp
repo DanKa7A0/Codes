@@ -4,6 +4,7 @@ StandartAccount::StandartAccount(int client_ID, string account_ID) : Account(cli
     transactionFee = 1;
     withdrawalsFee = 0.50;
     balance += 200;
+    accountType = "Standart";
 }
 
 // double StandartAccount::getBalance() const {

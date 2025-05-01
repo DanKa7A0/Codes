@@ -19,10 +19,26 @@ void Client::registerAcc(std::istream &in, std::ostream &out){
     out << endl << "Client Registered!" << endl;
 }
 
-string Client::getFirstName(){
-    return firstName;
+string Client::getFullName() {
+    return firstName + " " + lastName;
 }
 
 int Client::getId(){
     return id;
+}
+
+void Client::pushAccount(Account* acc) {
+    accounts.push_back(acc);
+}
+
+void Client::printAccounts(std::ostream &out) {
+    // Anna Petrova's accounts:
+    // X9Y8 (Premium) - $100.00
+    out << std::setprecision(2) << std::fixed;
+    out << getFullName() << "'s accounts" << endl;    
+    for (int i = 0; i < accounts.size(); i++) {
+        Account* acc = accounts[i];
+        out << acc->getAccount_ID() << " (" << acc->getAccountType() << ") " << "- $" << acc->getBalance() << endl;
+    }
+    
 }

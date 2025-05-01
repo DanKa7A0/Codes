@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <vector>
 
@@ -17,13 +18,16 @@ public:
 
     void registerAcc(std::istream &in, std::ostream &out);
 
-    string getFirstName();
+    string getFullName();
     int getId();
+
+    void pushAccount(Account* acc);
+    void printAccounts(std::ostream &out);
 
 private:
     int id;
     string firstName;
     string lastName;
     string phoneNumber;
-    vector<Account> accounts;
+    vector<Account*> accounts;
 };

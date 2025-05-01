@@ -5,3 +5,11 @@ Account::Account(int client_ID, string account_ID): client_ID(client_ID), accoun
 double Account::getBalance() const {
     return balance;
 }
+
+string Account::getAccount_ID() const {
+    return account_ID;
+}
+
+string Account::getAccountType() const {
+    return accountType;
+}
