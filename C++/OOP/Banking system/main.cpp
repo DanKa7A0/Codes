@@ -103,6 +103,7 @@ int main(int argc, char const *argv[]){
             *input >> client_ID;
             cout << endl;
             clients.at(client_ID).printAccounts(cout);
+            
         }
 
         if (cmd == "8") {
