@@ -12,6 +12,9 @@ public:
     string getAccount_ID() const;
     string getAccountType() const;
 
+    void depositMoney( double deposit);
+
+
 protected:
     int client_ID;
     string account_ID;

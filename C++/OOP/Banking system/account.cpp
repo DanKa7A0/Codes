@@ -13,3 +13,7 @@ string Account::getAccount_ID() const {
 string Account::getAccountType() const {
     return accountType;
 }
+
+void Account::depositMoney(double deposit) {
+    balance += deposit;
+}

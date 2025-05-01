@@ -40,7 +40,7 @@ int main(int argc, char const *argv[]){
     while (*input >> cmd) {
         // cout << cmd << endl;
         // continue;
-        if (cmd == "1") {
+        if (cmd == "1") { // register client
             int client_ID;
             string firstName;
             string lastName;
@@ -64,7 +64,7 @@ int main(int argc, char const *argv[]){
             cout << endl << "Client Registered!" << endl << endl;
         }
 
-        if (cmd == "2") {           
+        if (cmd == "2") { // open account
             int client_ID;
             string account_ID;
             string accountType;
@@ -97,7 +97,7 @@ int main(int argc, char const *argv[]){
             }                        
         }
 
-        if (cmd == "3") {
+        if (cmd == "3") { // show client accounts
             int client_ID;            
             cout << "Client ID: ";
             *input >> client_ID;
@@ -106,7 +106,22 @@ int main(int argc, char const *argv[]){
             
         }
 
-        if (cmd == "8") {
+
+        if (cmd == "4"){ // deposit in account            
+            string account_ID;
+            cout << endl << "Accout number: ";
+            *input >> account_ID;
+            Account* targetAcc = accounts.at(account_ID);
+
+            double deposit;
+            cout << endl << "Enter amount to deposit: ";
+            *input >> deposit;
+
+            targetAcc->depositMoney(deposit);
+            cout << endl << "Deposit successful. New balance: " << targetAcc->getBalance() << endl << endl;
+        }
+
+        if (cmd == "8") { // end 
             break;
         }
     }
