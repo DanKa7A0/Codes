@@ -2,6 +2,7 @@
 #include "client.h"
 
 #include <iostream>
+#include <fstream> // Added for std::ifstream
 #include <map>
 
 using namespace std;
@@ -19,8 +20,22 @@ int main(int argc, char const *argv[]){
     cout << "[7] Show Account" << endl;
     cout << "[8] Exit" << endl;
 
+
+    // make input stream
+    string command;    
+    istream* input = &std::cin; // Default to std::cin
+    ifstream testInput;
+    if (argc > 1) { // if a test file is provided read from it
+        testInput.open(argv[1]);
+        if (!testInput) {
+            cerr << "Could not open test file." << endl;
+            return 1;
+        }
+        input = &testInput; // Use file if provided
+    }
+
     string cmd;
-    while (cin >> cmd) {
+    while (*input >> cmd) {
         if (cmd == "1") {
             int id;
             string firstName;
@@ -28,21 +43,19 @@ int main(int argc, char const *argv[]){
             string phoneNumber;
 
             cout << "Client ID (4 digits): ";
-            cin >> id;
+            *input >> id;
 
             cout << endl << "First Name: ";
-            cin >> firstName;
+            *input >> firstName;
 
             cout << endl << "Last name: ";
-            cin >> lastName;
+            *input >> lastName;
 
-            cout << "Phone Number: ";
-            cin >> phoneNumber;
+            cout << endl << "Phone Number: ";
+            *input >> phoneNumber;
             
             Client client(id, firstName, lastName, phoneNumber);
             clients.insert({id, client});
-
-            cout << clients.at(id).getFirstName();
 
             cout << endl << "Client Registered!" << endl;
         }
