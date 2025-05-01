@@ -1,5 +1,6 @@
 #include "account.h"
 #include "client.h"
+#include "standartAccount.h"
 
 #include <iostream>
 #include <fstream> // Added for std::ifstream
@@ -8,7 +9,7 @@
 using namespace std;
 
 int main(int argc, char const *argv[]){
-    map<int, Account> accounts;
+    map<string, Account*> accounts;
     map<int, Client> clients;
 
     // make input stream
@@ -22,6 +23,7 @@ int main(int argc, char const *argv[]){
             return 1;
         }
         input = &testInput; // Use file if provided
+
     }
 
     cout << "[1] Register Client:" << endl;
@@ -31,10 +33,12 @@ int main(int argc, char const *argv[]){
     cout << "[5] Withdraw" << endl;
     cout << "[6] Transfer" << endl;
     cout << "[7] Show Account" << endl;
-    cout << "[8] Exit" << endl;
+    cout << "[8] Exit" << endl << endl;
 
     string cmd;
     while (*input >> cmd) {
+        // cout << cmd << endl;
+        // continue;
         if (cmd == "1") {
             int client_ID;
             string firstName;
@@ -56,7 +60,38 @@ int main(int argc, char const *argv[]){
             Client client(client_ID, firstName, lastName, phoneNumber);
             clients.insert({client_ID, client});
         
-            cout << endl << "Client Registered!" << endl;
+            cout << endl << endl << "Client Registered!" << endl << endl;
+        }
+
+        if (cmd == "2") {
+            // Choose option: 2
+            // Client ID: 1001
+            // Account number: X9Y8
+            // Type (standard/premium): premium
+            // Account created! Balance: $100.00
+            
+            int client_ID;
+            string account_ID;
+            string accountType;
+            
+            cout << "Client ID: ";
+            *input >> client_ID;
+            // cout << client_ID;
+
+            cout << endl << "Accout number: ";
+            *input >> account_ID;
+            // cout << account_ID;
+
+            cout << endl << "Type (standart/premium): ";
+            *input >> accountType;
+            // cout << accountType << endl;
+                
+            if (accountType == "standart") {
+                Account* account = new StandartAccount(client_ID, account_ID);
+                accounts.insert({account_ID, account});
+                cout << endl << "Account created! Balance: " << account->getBalance() << endl;
+            }
+
         }
 
         if (cmd == "8") {
