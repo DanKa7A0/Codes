@@ -128,11 +128,33 @@ int main(int argc, char const *argv[]){
             Account* targetAcc = accounts.at(account_ID);
 
             double withdraw;
-            cout << endl << "Enter amount to deposit: ";
+            cout << endl << "Enter amount to withdraw: ";
             *input >> withdraw;
 
             targetAcc->withdrawMoney(withdraw);
             cout << endl << "Withdrawal successful. Fee: " << targetAcc->getWithdrawFee() << ". New balance: " << targetAcc->getBalance() << endl << endl;
+        }
+
+        if (cmd == "6") { // transfer
+            string sourceAccount_ID;
+            cout << endl << "Enter source account number: ";
+            *input >> sourceAccount_ID;
+            Account* sourceAcc = accounts.at(sourceAccount_ID);
+
+            string destinationAccount_ID;
+            cout << endl << "Enter destination  account number: ";
+            *input >> destinationAccount_ID;
+            Account* destinationAcc = accounts.at(destinationAccount_ID);
+
+            double transfer;
+            cout << endl << "Enter amount to transfer: ";
+            *input >> transfer;
+
+            sourceAcc->transferMoney(destinationAccount_ID, transfer, accounts);
+
+            cout << endl << "Transfer successful." << endl;
+            cout << "Source account. Fee: " <<  sourceAcc->getTransactionFee() << "%. New balance: " <<  sourceAcc->getBalance() << endl;
+            cout << "Destination account." << " New balance: " <<  destinationAcc->getBalance() << endl;
         }
 
         if (cmd == "8") { // end 

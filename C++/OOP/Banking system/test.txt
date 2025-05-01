@@ -25,4 +25,9 @@ abcd
 abcd
 100
 
+6
+abcd
+dcba
+100
+
 8

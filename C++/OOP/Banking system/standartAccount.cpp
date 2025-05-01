@@ -1,7 +1,7 @@
 #include "standartAccount.h"
 
 StandartAccount::StandartAccount(int client_ID, string account_ID) : Account(client_ID, account_ID){
-    transactionFee = 1;
+    transactionFee = 1.01;
     withdrawFee = 0.50;
     balance += 200;
     accountType = "Standart";
