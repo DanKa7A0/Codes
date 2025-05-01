@@ -8,7 +8,7 @@
 #include <map>
 
 using namespace std;
-
+ 
 int main(int argc, char const *argv[]){
     map<string, Account*> accounts;
     map<int, Client> clients;
