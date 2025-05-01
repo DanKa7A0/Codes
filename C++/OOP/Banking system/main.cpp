@@ -102,12 +102,10 @@ int main(int argc, char const *argv[]){
             cout << "Client ID: ";
             *input >> client_ID;
             cout << endl;
-            clients.at(client_ID).printAccounts(cout);
-            
+            clients.at(client_ID).printAccounts(cout);            
         }
 
-
-        if (cmd == "4") { // deposit in account            
+        if (cmd == "4") { // deposit in account
             string account_ID;
             cout << endl << "Accout number: ";
             *input >> account_ID;
@@ -118,6 +116,7 @@ int main(int argc, char const *argv[]){
             *input >> deposit;
 
             targetAcc->depositMoney(deposit);
+            targetAcc->addTransaction("Deposit: +", deposit);
             cout << endl << "Deposit successful. New balance: " << targetAcc->getBalance() << endl << endl;
         }
 
@@ -132,6 +131,7 @@ int main(int argc, char const *argv[]){
             *input >> withdraw;
 
             targetAcc->withdrawMoney(withdraw);
+            targetAcc->addTransaction("Withdraw: -", withdraw);
             cout << endl << "Withdrawal successful. Fee: " << targetAcc->getWithdrawFee() << ". New balance: " << targetAcc->getBalance() << endl << endl;
         }
 
@@ -151,20 +151,43 @@ int main(int argc, char const *argv[]){
             *input >> transfer;
 
             sourceAcc->transferMoney(destinationAccount_ID, transfer, accounts);
+            sourceAcc->addTransaction("Transfer: +", transfer);
+            destinationAcc->addTransaction("Transfer: -", transfer);
 
             cout << endl << "Transfer successful." << endl;
-            cout << "Source account. Fee: " <<  sourceAcc->getTransactionFee() << "%. New balance: " <<  sourceAcc->getBalance() << endl;
+            cout << "Source account. Fee: " <<  sourceAcc->getTransferFee() << "%. New balance: " <<  sourceAcc->getBalance() << endl;
             cout << "Destination account." << " New balance: " <<  destinationAcc->getBalance() << endl;
+        }
+
+        if (cmd == "7") { // show account
+            string account_ID;
+            cout << endl << "Accout number: ";
+            *input >> account_ID;
+            if (accounts.find(account_ID) == accounts.end()) {
+                cout << "Accout number didn't exist" << endl;
+                continue;
+            }
+            Account* targetAcc = accounts.at(account_ID);
+            int client_ID = targetAcc->getClient_ID();
+            if (clients.find(client_ID) == clients.end()){
+                cout << "Client account didn't exist" << endl;
+                continue;
+            }
+            Client client = clients.at(client_ID);
+
+            cout << endl << "Owner: " << client.getFullName() << " (ID: " << client_ID << ")" << endl;
+            cout << "Type: " << targetAcc->getAccountType() << endl;
+            cout << "Balance: $" << targetAcc->getBalance() << endl;
+            cout << "Last transactions: " << endl;
+            targetAcc->printLastTransactions(cout);
+            
+
         }
 
         if (cmd == "8") { // end 
             break;
         }
     }
-
-
-    
-
 
     return 0;
 }

@@ -9,16 +9,22 @@ double Account::getBalance() const {
 string Account::getAccount_ID() const {
     return account_ID;
 }
-string Account::getAccountType() const {
+int Account::getClient_ID() const{
+    return client_ID;
+}
+string Account::getAccountType() const
+{
     return accountType;
 }
-double Account::getTransactionFee() const{
-    return transactionFee;
+double Account::getTransferFee() const{
+    return transferFee;
 }
 double Account::getWithdrawFee() const{
     return withdrawFee;
 }
-
+vector<string> Account::getTransactions() const{
+    return transactions;
+}
 
 // functional 
 void Account::depositMoney(double deposit) {
@@ -28,9 +34,19 @@ void Account::withdrawMoney(double withdraw) {
     balance -= (withdraw + withdrawFee);
 }
 void Account::transferMoney(string account_ID, int transfer, map<string, Account*> accounts){
-    balance -= (transfer * getTransactionFee());
+    balance -= (transfer * getTransferFee());
 
     if (accounts.find(account_ID) != accounts.end()){
         accounts.at(account_ID)->depositMoney(transfer);
+    }
+}
+void Account::addTransaction(string type, double money){
+    std::ostringstream oss;
+    oss << std::fixed << std::setprecision(2) << money;
+    transactions.push_back(type + " $" + oss.str());
+}
+void Account::printLastTransactions(std::ostream &out){
+    for (int i = transactions.size()-1; i >= 0; i--){
+        out << "   " << transactions[i] << endl;
     }
 }
