@@ -8,7 +8,7 @@ Meikan
 1001
 abcd
 standart
- 
+
 2
 1001
 dcba
