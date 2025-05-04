@@ -151,8 +151,8 @@ int main(int argc, char const *argv[]){
             *input >> transfer;
 
             sourceAcc->transferMoney(destinationAccount_ID, transfer, accounts);
-            sourceAcc->addTransaction("Transfer: +", transfer);
-            destinationAcc->addTransaction("Transfer: -", transfer);
+            sourceAcc->addTransaction("Transfer: -", transfer);
+            destinationAcc->addTransaction("Transfer: +", transfer);
 
             cout << endl << "Transfer successful." << endl;
             cout << "Source account. Fee: " <<  sourceAcc->getTransferFee() << "%. New balance: " <<  sourceAcc->getBalance() << endl;
