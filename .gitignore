@@ -1,5 +1,10 @@
 #ignore file for Visual Studio Code projects
 *.vscode
 
-#ignore exe files
+#ignore exe files and builds
+*build
 *.exe
+
+#ignore ts config file
+*tsconfig.json
+
