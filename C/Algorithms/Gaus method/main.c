@@ -5,22 +5,26 @@
 
 int main(int argc, char const *argv[]){
 
+    // double arr[ROW][COL] = {
+    //     {-3, -1,  2, -11},
+    //     { 2,  1, -1, 8},
+    //     {-2,  1,  2, -3}
+    // };
+
     double arr[ROW][COL] = {
-        {-3, -1,  2, -11},
-        { 2,  1, -1, 8},
-        {-2,  1,  2, -3}
+        {2,  0,  1, 134},
+        {1, -3,  8,  12},
+        {7,  3,  5, -36}
     };
 
     // algoirithm
     for (size_t k = 0; k < ROW; k++){
         // divide k row by k element (make 1 the diagonal element)
         const double firstEl = arr[k][k];
-            for (size_t j = 0; j < COL; j++){
-                arr[k][j] = arr[k][j] / firstEl;
-            }
-
-        if (k+1 == ROW) break;
-
+        for (size_t j = 0; j < COL; j++){
+            arr[k][j] = arr[k][j] / firstEl;
+        }        
+        
         // make 0 the elements below the diagonal element
         for (size_t i = k + 1; i < ROW; i++){
             const double el = arr[i][k];
