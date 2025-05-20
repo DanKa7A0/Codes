@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "esnext", // ECMAScript target version
+    "module": "esnext", // Specify module code generation
+    "rootDir": "./src",
+    "outDir": "./build",
+    "sourceMap": true
+  }
+}
