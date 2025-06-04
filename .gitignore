@@ -1,5 +1,6 @@
-#ignore exe files
+#ignore executable files
 *.exe
+*main
 
 #ignore build files
 *build/
