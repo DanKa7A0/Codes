@@ -5,7 +5,7 @@ function conditionalNumber<T>(input: T extends number ? T : string){
     } 
     
     console.log(input);
-    
+    return;
 }
 
 
