@@ -27,8 +27,8 @@ int Client::getId(){
     return id;
 }
 
-void Client::pushAccount(Account* acc) {
-    accounts.push_back(acc);
+void Client::pushAccount(std::unique_ptr<Account> acc) {
+    accounts.push_back(std::move(acc));
 }
 
 void Client::printAccounts(std::ostream &out) {
@@ -36,9 +36,9 @@ void Client::printAccounts(std::ostream &out) {
     // X9Y8 (Premium) - $100.00
     out << std::setprecision(2) << std::fixed;
     out << getFullName() << "'s accounts" << endl;    
-    for (int i = 0; i < accounts.size(); i++) {
-        Account* acc = accounts[i];
+    // for (int i = 0; i < accounts.size(); i++) {
+    for (const auto& acc : accounts) {
+        // Account* acc = accounts[i];
         out << acc->getAccount_ID() << " (" << acc->getAccountType() << ") " << "- $" << acc->getBalance() << endl;
-    }
-    
+    }    
 }

@@ -6,11 +6,12 @@
 #include <iostream>
 #include <fstream> // Added for std::ifstream
 #include <map>
+#include <memory>
 
 using namespace std;
 
 int main(int argc, char const *argv[]){
-    map<string, Account*> accounts;
+    map<string, std::unique_ptr<Account>> accounts;
     map<int, Client> clients;
 
     // make input stream
@@ -59,7 +60,7 @@ int main(int argc, char const *argv[]){
             *input >> phoneNumber;
             
             Client client(client_ID, firstName, lastName, phoneNumber);
-            clients.insert({client_ID, client});
+            clients.insert({client_ID, std::move(client)});
         
             cout << endl << "Client Registered!" << endl << endl;
         }
@@ -82,17 +83,19 @@ int main(int argc, char const *argv[]){
             // cout << accountType << endl;
                 
             if (accountType == "standart") {
-                Account* account = new StandartAccount(client_ID, account_ID);
+                std::unique_ptr<Account> account = std::make_unique<StandartAccount>(client_ID, account_ID);
                 cout << account_ID << endl;
-                accounts.insert({account_ID, account});
-                clients.at(client_ID).pushAccount(account);
+                accounts.insert({account_ID, std::move(account)});
+                // clients.at(client_ID).pushAccount(std::make_unique<StandartAccount>(*account));
+                // std::unique_ptr<Account> newAccount = account->clone();
+                clients.at(client_ID).pushAccount(std::move(account));
                 cout << endl << "Account created! Balance: " << account->getBalance() << endl;
             }
 
             if (accountType == "premium") {
-                Account* account = new PremiumAccount(client_ID, account_ID);
-                accounts.insert({account_ID, account});
-                clients.at(client_ID).pushAccount(account);
+                std::unique_ptr<Account> account = std::make_unique<StandartAccount>(client_ID, account_ID);
+                accounts.insert({account_ID, std::move(account)});
+                clients.at(client_ID).pushAccount(std::move(account));
                 cout << endl << "Account created! Balance: " << account->getBalance() << endl << endl;
             }                        
         }
@@ -109,7 +112,7 @@ int main(int argc, char const *argv[]){
             string account_ID;
             cout << endl << "Accout number: ";
             *input >> account_ID;
-            Account* targetAcc = accounts.at(account_ID);
+            std::unique_ptr<Account> targetAcc = std::move(accounts.at(account_ID));
 
             double deposit;
             cout << endl << "Enter amount to deposit: ";
@@ -124,7 +127,8 @@ int main(int argc, char const *argv[]){
             string account_ID;
             cout << endl << "Accout number: ";
             *input >> account_ID;
-            Account* targetAcc = accounts.at(account_ID);
+            // Account* targetAcc = accounts.at(account_ID);
+            std::unique_ptr<Account> targetAcc = std::move(accounts.at(account_ID));
 
             double withdraw;
             cout << endl << "Enter amount to withdraw: ";
@@ -139,18 +143,20 @@ int main(int argc, char const *argv[]){
             string sourceAccount_ID;
             cout << endl << "Enter source account number: ";
             *input >> sourceAccount_ID;
-            Account* sourceAcc = accounts.at(sourceAccount_ID);
+            // Account* sourceAcc = accounts.at(sourceAccount_ID);
+            std::unique_ptr<Account> sourceAcc = std::move(accounts.at(sourceAccount_ID));
 
             string destinationAccount_ID;
             cout << endl << "Enter destination  account number: ";
             *input >> destinationAccount_ID;
-            Account* destinationAcc = accounts.at(destinationAccount_ID);
+            // Account* destinationAcc = accounts.at(destinationAccount_ID);
+            std::unique_ptr<Account> destinationAcc = std::move(accounts.at(destinationAccount_ID));
 
             double transfer;
             cout << endl << "Enter amount to transfer: ";
             *input >> transfer;
 
-            sourceAcc->transferMoney(destinationAccount_ID, transfer, accounts);
+            sourceAcc->transferMoney(destinationAccount_ID, transfer, std::move(accounts));
             sourceAcc->addTransaction("Transfer: -", transfer);
             destinationAcc->addTransaction("Transfer: +", transfer);
 
@@ -167,13 +173,15 @@ int main(int argc, char const *argv[]){
                 cout << "Accout number didn't exist" << endl;
                 continue;
             }
-            Account* targetAcc = accounts.at(account_ID);
+            // Account* targetAcc = accounts.at(account_ID);
+            std::unique_ptr<Account> targetAcc = std::move(accounts.at(account_ID));
+            
             int client_ID = targetAcc->getClient_ID();
             if (clients.find(client_ID) == clients.end()){
                 cout << "Client account didn't exist" << endl;
                 continue;
             }
-            Client client = clients.at(client_ID);
+            Client client = std::move(clients.at(client_ID));
 
             cout << endl << "Owner: " << client.getFullName() << " (ID: " << client_ID << ")" << endl;
             cout << "Type: " << targetAcc->getAccountType() << endl;

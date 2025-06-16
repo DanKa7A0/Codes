@@ -33,7 +33,7 @@ void Account::depositMoney(double deposit) {
 void Account::withdrawMoney(double withdraw) {
     balance -= (withdraw + withdrawFee);
 }
-void Account::transferMoney(string account_ID, int transfer, map<string, Account*> accounts){
+void Account::transferMoney(string account_ID, int transfer, map<string, std::unique_ptr<Account>> accounts){
     balance -= (transfer * getTransferFee());
 
     if (accounts.find(account_ID) != accounts.end()){
