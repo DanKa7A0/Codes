@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // ECMAScript target version
+    // "target": "esnext", // ECMAScript target version
+    "module": "nodenext", // module code generation
+    // "module": "esnext", // Specify module code generation
+    "rootDir": "./src",
+    "outDir": "./build",
+    "sourceMap": true,
+    "noImplicitOverride": true,
+    "strict": true, // strict type-checking options
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "nodenext"
+  }
+}
