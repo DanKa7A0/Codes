@@ -5,7 +5,7 @@
 #ignore build files
 *build/
 
-#ignore another files
+#ignore another files 
 *.zip
 *.docx
 *.doc
